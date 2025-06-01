@@ -27,6 +27,18 @@ cv.imshow('resized',resized)
 cropped = img[50:200,200:787]
 cv.imshow('cropped',cropped)
 
+#Traslation of the image 
+
+def Translate(img,x,y):
+    transMat = np.float32([[1,0,x],[0,1,y]])
+    dimensions = (img.shape[1],img.shape[0])
+    return cv.warpAffine(img, transMat, dimensions)
+
+translated = Translate(img, 84, 120)
+cv.imshow('Translated Image', translated)
+
+# Display the translated image
+
 
 cv.imshow('canny',canny)
 cv.imshow('Blur',blur)
