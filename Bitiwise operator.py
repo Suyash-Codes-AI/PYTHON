@@ -45,4 +45,4 @@ bitwise_not_circle = cv.bitwise_not(circle)
 cv.imshow('Bitwise Not Circle', bitwise_not_circle) 
 cv.waitKey(0) 
 
-# Convert the image to RGB format
+
