@@ -5,9 +5,16 @@ import numpy as np
 img = cv.imread('PHOTOS/billu1.jpeg')
 cv.imshow('cute',img)
 
+
+blank = np.zeros((img.shape[:2],img.shape[1]),dtype = 'unit8')
+
 gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
 cv.imshow('gray',gray)
 
+circle = cv.circle(blank,(img.shape[1]//2,img.shape[0]//2),100,255,-1)
+
+mask = cv.bitwise_and(gray,gray,mask=circle)
+cv.imshow('mask',mask)
 #Grayscale histogram
 """
 📷 Grayscale Histogram - In Short
@@ -31,7 +38,7 @@ have each brightness level from 0 (black) to 255 (white).
 #In a histogram, a bin is a range of intensity values that are grouped together to count how many pixels fall into that range.'
 
 
-gray_hist = cv.calcHist([gray], [0] , None , [256],[0,256])
+gray_hist = cv.calcHist([gray], [0] , circle , [256],[0,256])
 plt.figure()
 plt.title('Grayscale Histogram')
 plt.xlabel('Bins')
@@ -40,6 +47,23 @@ plt.plot(gray_hist)
 plt.xlim([0,256])
 
 plt.show()
+
+
+#Colour Histogram
+
+plt.figure()
+plt.title('grayscale Histogram')
+plt.xlabel('Bins')
+plt.ylabel('No of pixels in the image ')
+
+
+colors = ('b','g','r')
+for i,col in enumerate(colors):
+    hist = cv.calcHist([img],[i],None,[256],[0,256])
+    plt.plot(hist,color=col)
+    plt.xlim([0,256])
+    plt.title('color histogram')
+plt.show() 
 
 
 cv.waitKey(0) 
